@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import softuni.library.models.dto.xmls.CharacterImportDto;
 import softuni.library.models.dto.xmls.CharacterRootImportDto;
+import softuni.library.models.entity.Book;
 import softuni.library.models.entity.Character;
 import softuni.library.repositories.CharacterRepository;
 import softuni.library.services.CharacterService;
@@ -64,7 +65,8 @@ public class CharacterServiceImpl implements CharacterService {
         for (CharacterImportDto characterImportDto : characterRootImportDto.getCharacterImportDtos() ) {
                 if (this.validatorUtil.isValid(characterImportDto)){
                     Character character = this.modelMapper.map(characterImportDto, Character.class);
-
+                    Book book = character.getBook();
+                    character.setBook(book);
 
                     this.characterRepository.saveAndFlush(character);
                     sb.append(String

@@ -36,10 +36,11 @@ public class CharacterImportDto {
     @Length(min = 5)
     @NotNull
     private String role;
-    @XmlElement
+    @XmlElement(name = "birthday")
     @NotNull
     @XmlJavaTypeAdapter(LocalDateAdaptor.class)
     private LocalDate birthday;
+    @XmlElement(name = "book")
     private BookImportXMLDto bookImportXMLDto;
 
     public LocalDate getBirthday() {
